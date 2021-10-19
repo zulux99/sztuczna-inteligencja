@@ -20,6 +20,21 @@ def calculateDistance(ax, ay, bx, by):
     distance = pow(pow(bx - ax, 2) + pow(by - ay, 2), 1/2)
     return distance
 
+def shortestPath(list, punktStartowy):
+    startX = list[0].wspolrzednaX
+    startY = list[0].wspolrzednaY
+    for i in list:
+        print(calculateDistance(startX, startY, i.wspolrzednaX, i.wspolrzednaY))
+
+def inputLetter(message):
+    while(True):
+        try:
+            x = str(input(message))
+        except ValueError:
+            print("Podana wartość nie jest literą")
+        else:
+            return x
+
 alfabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 wierzcholki = []
 while(True):
@@ -37,5 +52,6 @@ del tempX, tempY
 print ("Podałeś następujące wierzchołki: ")
 for obiekt in wierzcholki:
     print(obiekt)
-
-print(calculateDistance(wierzcholki[0].wspolrzednaX, wierzcholki[0].wspolrzednaY, wierzcholki[1].wspolrzednaX, wierzcholki[1].wspolrzednaY))
+shortestPath(wierzcholki)
+wierzcholekStartowy = inputLetter("Podaj literę wierzchołka startowego: ")
+# for i in range(iloscWierzcholkow):
