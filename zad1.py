@@ -5,13 +5,13 @@ class Wierzcholek:
         self.wspolrzednaY = wspolrzednaY
     def __repr__(self):
         return str(self.id) + " = [" + str(self.wspolrzednaX) + "," + str(self.wspolrzednaY) + "]"
+
 def inputInteger(message):
     while(True):
         try:
             x = int(input(message))
         except ValueError:
             print("Podana wartość nie jest liczbą całkowitą")
-            print("Podaj liczbę całkowitą: ")
             continue
         else:
             return x
@@ -22,7 +22,13 @@ def calculateDistance(ax, ay, bx, by):
 
 alfabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 wierzcholki = []
-iloscWierzcholkow = inputInteger("Podaj liczbę wierzchołków: ")
+while(True):
+    iloscWierzcholkow = inputInteger("Podaj liczbę wierzchołków: ")
+    if (iloscWierzcholkow < 2):
+        print("Musisz podać minimum dwa wierzchołki")
+        continue
+    else:
+        break
 for i in range(iloscWierzcholkow):
     tempX = inputInteger("Podaj współrzędną X: ")
     tempY = inputInteger("Podaj współrzędną Y: ")
@@ -31,5 +37,5 @@ del tempX, tempY
 print ("Podałeś następujące wierzchołki: ")
 for obiekt in wierzcholki:
     print(obiekt)
-# TODO
-calculateDistance(wierzcholki)
+
+print(calculateDistance(wierzcholki[0].wspolrzednaX, wierzcholki[0].wspolrzednaY, wierzcholki[1].wspolrzednaX, wierzcholki[1].wspolrzednaY))
