@@ -1,6 +1,7 @@
 class Wierzcholek:
     def __init__(self, wspolrzednaX, wspolrzednaY, id):
         self.id = id
+        self.odwiedzony = False
         self.wspolrzednaX = wspolrzednaX
         self.wspolrzednaY = wspolrzednaY
     def __repr__(self):
@@ -21,16 +22,16 @@ def calculateDistance(ax, ay, bx, by):
     return distance
 
 def shortestPath(punktStartowy, lista):
-    najkrotszaOdlegosc = 0
-    najblizszyWierzcholek = punktStartowy.id
+    najkrotszaOdlegosc = 5125152124789
+    aktualnaOdleglosc = najkrotszaOdlegosc + 1
     for i in lista:
-        aktualnaOdleglosc = calculateDistance(punktStartowy.wspolrzednaX, punktStartowy.wspolrzednaY, i.wspolrzednaX, i.wspolrzednaY)
-        if i == 0 and aktualnaOdleglosc != 0:
+        if punktStartowy.id != i.id and i.odwiedzony == False:
+            aktualnaOdleglosc = calculateDistance(punktStartowy.wspolrzednaX, punktStartowy.wspolrzednaY, i.wspolrzednaX, i.wspolrzednaY)
+            punktStartowy.odwiedzony = True
+        if najkrotszaOdlegosc > aktualnaOdleglosc:
             najkrotszaOdlegosc = aktualnaOdleglosc
-        elif najkrotszaOdlegosc > aktualnaOdleglosc:
-            najkrotszaOdlegosc = aktualnaOdleglosc
-            najblizszyWierzcholek = i.id
-    return najblizszyWierzcholek
+            najblizszyWierzcholek = i
+    return najblizszyWierzcholek, najkrotszaOdlegosc
 
 def inputLetter(message):
     while(True):
@@ -57,6 +58,23 @@ for i in range(iloscWierzcholkow):
 del tempX, tempY
 print ("Podałeś następujące wierzchołki: ")
 for obiekt in wierzcholki:
-    print(obiekt)
-wierzcholekStartowy = inputLetter("Podaj literę wierzchołka startowego: ")
-print(shortestPath(wierzcholki[0], wierzcholki))
+	print(obiekt)
+literaWierzcholkaStartowego = inputLetter("Podaj literę wierzchołka startowego: ").upper()
+print(literaWierzcholkaStartowego, "->", end=' ')
+for i in wierzcholki:
+    if i.id == literaWierzcholkaStartowego:
+        wierzcholekStartowy = i
+suma = 0
+for i in wierzcholki:
+    if i == wierzcholki[0]:
+        nastepnyWierzcholek, odleglosc = shortestPath(wierzcholekStartowy, wierzcholki)
+        print(nastepnyWierzcholek.id, "->", end=' ')
+    elif i == wierzcholki[-1]:
+        odleglosc = calculateDistance(nastepnyWierzcholek.wspolrzednaX, nastepnyWierzcholek.wspolrzednaY, wierzcholekStartowy.wspolrzednaX, wierzcholekStartowy.wspolrzednaY)
+    else:
+        nastepnyWierzcholek, odleglosc = shortestPath(nastepnyWierzcholek, wierzcholki)
+        print(nastepnyWierzcholek.id, "->", end=' ')
+    suma += odleglosc
+print(wierzcholekStartowy.id)
+print(f"Odległość: {suma}")
+

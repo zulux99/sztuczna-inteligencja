@@ -1,0 +1,2 @@
+, end=' ')
+    odleglosc += odleglosc
