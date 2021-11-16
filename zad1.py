@@ -28,9 +28,9 @@ def shortestPath(punktStartowy, lista):
         if punktStartowy.id != i.id and i.odwiedzony == False:
             aktualnaOdleglosc = calculateDistance(punktStartowy.wspolrzednaX, punktStartowy.wspolrzednaY, i.wspolrzednaX, i.wspolrzednaY)
             punktStartowy.odwiedzony = True
-        if najkrotszaOdlegosc > aktualnaOdleglosc:
-            najkrotszaOdlegosc = aktualnaOdleglosc
-            najblizszyWierzcholek = i
+            if najkrotszaOdlegosc > aktualnaOdleglosc:
+                najkrotszaOdlegosc = aktualnaOdleglosc
+                najblizszyWierzcholek = i
     return najblizszyWierzcholek, najkrotszaOdlegosc
 
 def inputLetter(message):
@@ -77,4 +77,3 @@ for i in wierzcholki:
     suma += odleglosc
 print(wierzcholekStartowy.id)
 print(f"Odległość: {suma}")
-

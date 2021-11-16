@@ -1,2 +1,3 @@
-, end=' ')
-    odleglosc += odleglosc
+
+    test = test + i.procentNaKole
+print(test)
