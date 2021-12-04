@@ -1,5 +1,5 @@
 import random
-
+import copy
 class Osobnik:
     def __init__(self, fenotyp, wartosc, procentNaKole = None):
         self.fenotyp = fenotyp
@@ -21,7 +21,7 @@ def losuj(populacja):
     for i in populacja:
         suma = suma + i.procentNaKole
         if suma > losowa:
-            return i
+            return copy.deepcopy(i)
 
 # Losuje nowych potomków, korzystając z koła ruletki
 def funkcjaPrzystosowania(populacja):
